@@ -1,0 +1,6 @@
+03 00 00 00  //msb1 //3 decimal
+34 00 00 00  //msb2 //52 decimal
+2C 01 00 00  //msb3 //300 decimal
+71 02 00 00  //msb4 //625 decimal
+01 00 00 00  //msb5 //1 decimal
+10 00 00 00  //msb6 //10 hex
