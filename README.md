@@ -1,4 +1,4 @@
-# Proyecto-3. # Procesador RISC con Pipeline
+# Proyecto-3. Procesador RISC con Pipeline
 
 **Estudiantes:**
 - Fernandez Aguilar Randy Steve  
@@ -40,8 +40,3 @@ Entre cada etapa se han implementado registros de pipeline (`IF_ID`, `ID_EX`, `E
 
 Cada componente tiene su testbench correspondiente. Para validar el procesador completo, asegúrate de que las instrucciones en memoria estén alineadas a la lógica de pipeline y que las unidades de control de riesgos estén activas.
 
-## Requisitos
-
-- SystemVerilog
-- Simulador compatible (Icarus Verilog, ModelSim, etc.)
-- GTKWave (opcional, para visualización de señales en `.vcd`)
