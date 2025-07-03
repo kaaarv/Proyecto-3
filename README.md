@@ -1,4 +1,4 @@
-# Proyecto-3. Procesador RISC Uniciclo
+# Proyecto-3. # Procesador RISC con Pipeline
 
 **Estudiantes:**
 - Fernandez Aguilar Randy Steve  
@@ -6,25 +6,42 @@
 - Quiros Avila Karina  
 - Tencio Valverde Yonaikel Fabricio
 
-Este proyecto consiste en la implementación de un procesador RISC uniciclo desarrollado en SystemVerilog. Un procesador uniciclo ejecuta cada instrucción completamente en un único ciclo de reloj, lo que implica que todas las etapas —búsqueda de instrucción, decodificación, ejecución, acceso a memoria y escritura de resultados— se realizan dentro de ese mismo ciclo.
+Este proyecto implementa un procesador RISC con arquitectura de pipeline en SystemVerilog. A diferencia del procesador uniciclo, este diseño divide la ejecución de instrucciones en múltiples etapas que operan en paralelo, aumentando la eficiencia y el rendimiento del sistema.
+
+## Etapas del pipeline
+
+El procesador cuenta con las cinco etapas típicas de una arquitectura RISC:
+
+1. **IF (Instruction Fetch)**  
+2. **ID (Instruction Decode)**  
+3. **EX (Execute)**  
+4. **MEM (Memory access)**  
+5. **WB (Write Back)**
+
+Entre cada etapa se han implementado registros de pipeline (`IF_ID`, `ID_EX`, `EX_MEM`, `MEM_WB`) que permiten el paso de datos y señales de control de una etapa a la siguiente.
 
 ## Características principales
 
-- Arquitectura tipo RISC de un solo ciclo.
-- Unidad de control completamente combinacional.
-- ALU con soporte para operaciones aritmético-lógicas básicas.
-- Banco de registros con doble puerto de lectura y un puerto de escritura.
-- Memorias separadas para instrucciones y datos.
-- Soporte para instrucciones tipo R, tipo I y salto simple.
-- Componentes modulares con testbenches individuales.
-- Verificación mediante simulación y análisis de señales en archivos `.vcd`.
+- Arquitectura RISC segmentada en cinco etapas.
+- Implementación modular de registros entre etapas.
+- Unidad de detección de riesgos (Hazard Detection Unit).
+- Unidad de reenvío de datos (Forwarding Unit).
+- Simulación completa con testbenches por módulo.
+- Análisis de funcionamiento mediante archivos `.vcd`.
 
 ## Estructura del proyecto
 
-- `Procesador_RISC.sv`: módulo principal que conecta todos los componentes.
-- Módulos individuales: `ALU`, `Control_Unit`, `RegisterBank`, `PC`, `InstructionMemory`, `DataMemory`, `Multiplexor`, `ShiftUnit`, `SumaC2`, entre otros.
-- Testbenches: archivos `.sv` para pruebas funcionales de cada módulo y archivos `.vcd` para análisis en simuladores como GTKWave.
+- `Pipeline/`: contiene todos los módulos de procesamiento e integración principal (`Procesador_RISC_PIPELINE.sv`).
+- `Registros del Pipeline/`: módulos y testbenches de los registros entre etapas (`IF_ID.sv`, `EX_MEM_tb.sv`, etc.).
+- `Unidades_Riesgos/`: incluye `Hazard_U.sv`, `forwardunit.sv` y sus testbenches.
+- Otros módulos: ALU, Unidad de Control, Banco de Registros, Memorias, MUXes, etc.
 
 ## Simulación
 
-Cada módulo puede simularse por separado. Para simular el procesador completo, asegúrate de que todos los componentes estén correctamente conectados y que las instrucciones en memoria estén codificadas conforme a la arquitectura definida.
+Cada componente tiene su testbench correspondiente. Para validar el procesador completo, asegúrate de que las instrucciones en memoria estén alineadas a la lógica de pipeline y que las unidades de control de riesgos estén activas.
+
+## Requisitos
+
+- SystemVerilog
+- Simulador compatible (Icarus Verilog, ModelSim, etc.)
+- GTKWave (opcional, para visualización de señales en `.vcd`)
